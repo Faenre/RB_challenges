@@ -17,9 +17,9 @@ class CircularBuffer
   end
 
   def write(obj)
-    raise BufferFullException if buffer.size == @max_size
+    raise BufferFullException if full?
 
-    buffer << obj unless obj.nil?
+    write! obj
   end
 
   def write!(obj)
