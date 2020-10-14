@@ -11,9 +11,9 @@ class CircularBuffer
   end
 
   def read
-    raise BufferEmptyException if buffer.empty?
+    raise BufferEmptyException if empty?
 
-    buffer.shift
+    @buffer.shift
   end
 
   def write(obj)
@@ -25,8 +25,8 @@ class CircularBuffer
   def write!(obj)
     return if obj.nil?
 
-    buffer.shift if full?
-    buffer << obj
+    @buffer.shift if full?
+    @buffer << obj
   end
 
   def clear
@@ -35,9 +35,11 @@ class CircularBuffer
 
   private
 
-  attr_reader :buffer
-
   def full?
-    buffer.size == @max_size
+    @buffer.size == @max_size
+  end
+
+  def empty?
+    @buffer.empty?
   end
 end
